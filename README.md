@@ -1,8 +1,9 @@
-# CrickMUZZ CrickBuzz clone Project
+# CrickMuzz CrickBuzz clone Project
+
+A web application displaying cricket standings using Spring Boot for the backend and collecting data with Jsoup.
 
 ![Screenshot 1](screenshots/screenshot1.png)
 _Overview of the project._
-A web application displaying cricket standings using Spring Boot for the backend and collecting data with Jsoup.
 
 ## Table of Contents
 
@@ -26,7 +27,7 @@ _Overview of the project._
 ![Screenshot 2](screenshots/screenshot2.png)
 _Scoreboards Page._
 
-![Screenshot 2](screenshots/screenshot2.png)
+![Screenshot 3](screenshots/screenshot3.png)
 _REST API Call using Postman._
 
 ## Usage
