@@ -19,8 +19,6 @@ This project is a web application that displays cricket standings using Spring B
 
 ## Screenshots
 
-Include some screenshots of your web page here to give users a visual preview of the project.
-
 ![Screenshot 1](screenshots/screenshot1.png)
 _Overview of the project._
 
