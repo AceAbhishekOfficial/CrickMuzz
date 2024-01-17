@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Cricket Matches</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <!-- Bootstrap CSS -->
+
+    <!-- Font Awesome CSS (for icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .match-card {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container mt-5">
+        <h1 class="mb-4">Live Cricket Matches</h1>
+
+        <div id="matches-container"></div>
+
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        // Function to create a match card
+        function createMatchCard(match) {
+            const matchCard = document.createElement('div');
+            matchCard.classList.add('card', 'match-card');
+
+            const liveText = match.liveText ? match.liveText : "Match in progress";
+
+            matchCard.innerHTML = `
+            <div class="card-body">
+                <p class="heading">${match.teamHeading}</p>
+                <p class="details">${match.matchNumberVenue}</p>
+                <div class="scores">
+                    <div class="batting">
+                        <p class="score-heading">${match.battingTeam} (Batting)</p>
+                        <p class="scores-data">${match.battingTeamScore}</p>
+                        <p class="overs">${liveText}</p>
+                    </div>
+                    <div class="batting">
+                        <p class="score-heading">${match.bowlTeam} (Yet to Bat)</p>
+                        <p class="scores-data">${match.bowlTeamScore}</p>
+                        <p class="overs"></p>
+                    </div>
+                </div>
+                <p class="location">
+                    <i class="fa-solid fa-location-dot"></i>
+                    ${match.matchNumberVenue}
+                    <br>
+                    <i class="fa-solid fa-calendar" style="margin-top: 5px;"></i>
+                    ${new Date(match.date).toLocaleDateString()}
+                </p>
+                <p class="text-over"><span style="font-weight: bold;">RESULTS:</span> ${match.textComplete}</p>
+                <button class="view" onclick="window.location.href='${match.matchLink}'">View Details</button>
+            </div>
+        `;
+
+            return matchCard;
+        }
+
+        // Fetch data from the API
+        fetch('http://localhost:8080/cricket/live')
+            .then(response => response.json())
+            .then(data => {
+                // Process the data and generate HTML
+                const matchesContainer = document.getElementById('matches-container');
+
+                data.forEach(match => {
+                    const matchCard = createMatchCard(match);
+                    matchesContainer.appendChild(matchCard);
+                });
+            })
+            .catch(error => console.error('Error fetching data:', error));
+    </script>
+
+</body>
+
+</html>
